@@ -12,20 +12,20 @@ const playRegularGame = () => {
 
   while (tries < AVAILABLE_ATTEMPTS) {
     const guess = +prompt(
-      `Guess a number from 1-10. You have ${
+      `Guess a number from 1-10.🤔 You have ${
         AVAILABLE_ATTEMPTS - tries
       } attempts remaining.`
     );
 
     if (isNaN(guess) || guess < 1 || guess > 10 || !guess) {
-      alert("Please enter a valid number between 1 and 10.");
+      alert("❗Please enter a valid number between 1 and 10.❗");
       continue;
     }
 
     tries++;
     if (guess === secretNum) {
       alert(
-        `🥳 You guessed correctly! The number was ${secretNum}. You guessed it in ${tries} tries.`
+        `🥳 You guessed correctly!🎉 The number was ${secretNum}. You guessed it in ${tries} tries.`
       );
       break;
     } else if (guess > secretNum) {
@@ -43,7 +43,7 @@ const playRegularGame = () => {
     }
     if (tries === AVAILABLE_ATTEMPTS) {
       alert(
-        `Sorry, you have run out of attempts. The correct number was ${secretNum}.`
+        `Sorry, you have run out of attempts.😵 The correct number was ${secretNum}.`
       );
     }
   }
@@ -88,7 +88,7 @@ const playBonusGame = () => {
     if (areNumbersValid(minNumber, maxNumber)) {
       break;
     } else {
-      alert(`Invalid numbers! Try again`);
+      alert(`❗Invalid numbers! Try again!❗`);
     }
   }
 
@@ -99,7 +99,7 @@ const playBonusGame = () => {
   // while (bonusAttempts=true) incorrect syntax.
   while (availableTries < AVAILABLE_ATTEMPTS) {
     const guess = +prompt(
-      `Guess a number from ${minNumber} to ${maxNumber}. You have ${
+      `Guess a number from ${minNumber} to ${maxNumber}. 🤔 You have ${
         AVAILABLE_ATTEMPTS - availableTries
       } attempts remaining.`
     );
@@ -107,31 +107,31 @@ const playBonusGame = () => {
     //conditional that verifies guess
     if (isNaN(guess) || guess < minNumber || guess > maxNumber) {
       alert(
-        ` Please enter a valid number between ${minNumber} and ${maxNumber}.`
+        `❗Please enter a valid number between ${minNumber} and ${maxNumber}. ❗`
       );
       continue;
     }
     availableTries++;
 
     if (guess === randomNum) {
-      alert(`You win! You guessed correctly in ${availableTries} tries.`);
+      alert(`You win!🎉 You guessed correctly in ${availableTries} tries.`);
       break;
     } else if (guess > randomNum) {
       alert(
-        `Number is too high! You have ${
+        `Number is too high☝️ You have ${
           availableTries != AVAILABLE_ATTEMPTS ? "Guess again!" : ""
         }`
       );
     } else {
       alert(
-        `Number is too low ${
+        `Number is too low!👇 ${
           availableTries != AVAILABLE_ATTEMPTS ? "Guess again!" : ""
         }`
       );
     }
     if (availableTries === AVAILABLE_ATTEMPTS) {
       alert(
-        `Sorry, you have run out of attempts. The correct number was ${randomNum}`
+        `Sorry, you have run out of attempts.😵The correct number was ${randomNum}`
       );
     }
   }
@@ -142,11 +142,11 @@ const chooseGamemode = () => {
   let isActive = true;
   while (isActive) {
     let gameMode = prompt(
-      `Welcome to Number Guesser! Do you want to play on regular or bonus mode?`
+      `Welcome to Number Guesser! 🤩 Do you want to play on regular or bonus mode?`
     );
 
     if (gameMode === null) {
-      alert(`Goodbye!`);
+      alert(`Goodbye! 👋`);
       break;
     }
     gameMode = gameMode.trim(); // DO NOT FORGET ASSIGNMENT OPERATOR. Reassigned trim value of gameMode
