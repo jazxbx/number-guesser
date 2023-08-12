@@ -64,8 +64,10 @@ const playBonusGame = () => {
       minNumber === null ||
       isNaN(minNumber) ||
       minNumber > maxNumber ||
+      minNumber === 0 || // added condition
       maxNumber === null ||
       isNaN(maxNumber) ||
+      maxNumber === 0 ||
       maxNumber < minNumber
     ) {
       return false;
@@ -78,55 +80,59 @@ const playBonusGame = () => {
   );
   let minNumber, maxNumber;
 
-  // validate number
+  // Loop that accepts f areNumbersValid
   while (true) {
     minNumber = +prompt(`Input the minimum number`);
     maxNumber = +prompt(`Input the maximum number`);
+
     if (areNumbersValid(minNumber, maxNumber)) {
       break;
+    } else {
+      alert(`Invalid numbers! Try again`);
     }
   }
 
+  //  stores value of f randomRange
   const randomNum = getRandomRange(minNumber, maxNumber);
-  // console.log(`---random range ${randomNum}`);
+  let availableTries = 0;
+  // let bonusAttempts = true; OLD VARIABLE. I decided to just check immediately instead of passing a variable and mutating that variable in the code.
+  // while (bonusAttempts=true) incorrect syntax.
+  while (availableTries < AVAILABLE_ATTEMPTS) {
+    const guess = +prompt(
+      `Guess a number from ${minNumber} to ${maxNumber}. You have ${
+        AVAILABLE_ATTEMPTS - availableTries
+      } attempts remaining.`
+    );
 
-  // while (bonusAttempts=true) incorrect syntax
-  while (true) {
-    const guess = +prompt(`Guess the random number!`);
-    if (isNaN(guess) || guess < minNumber) {
-      alert(`No number! 😖`);
-      guess = +prompt(`Guess the random number! You have ${attempts} left`);
+    //conditional that verifies guess
+    if (isNaN(guess) || guess < minNumber || guess > maxNumber) {
+      alert(
+        ` Please enter a valid number between ${minNumber} and ${maxNumber}.`
+      );
       continue;
     }
-
-    if (guess === null) {
-      alert(`Goodbye!`);
-      break;
-    }
+    availableTries++;
 
     if (guess === randomNum) {
-      if (attempts > 1) {
-        tries++;
-        alert(`You win! You guessed correctly in ${tries} tries.`);
-      }
-      bonusAttempts = false;
+      alert(`You win! You guessed correctly in ${availableTries} tries.`);
+      break;
     } else if (guess > randomNum) {
-      if (attempts > 1) {
-        alert(`Guess is too high ☝️`);
-        attempts--;
-        guess = +prompt(`Guess the random number! You have ${attempts} left`);
-      } else {
-        alert(`You lost the game! The number was ${secretNum}`);
-      }
-    } else if (guess < randomNum) {
-      if (attempts > 1) {
-        alert(`Guess too low 👇`);
-        attempts--;
-        guess = +prompt(`Guess the random number! You have ${attempts} left`);
-      } else {
-        alert(`You lost the game! The random number was ${secretNum}!`);
-        bonusAttempts = false;
-      }
+      alert(
+        `Number is too high! You have ${
+          availableTries != AVAILABLE_ATTEMPTS ? "Guess again!" : ""
+        }`
+      );
+    } else {
+      alert(
+        `Number is too low ${
+          availableTries != AVAILABLE_ATTEMPTS ? "Guess again!" : ""
+        }`
+      );
+    }
+    if (availableTries === AVAILABLE_ATTEMPTS) {
+      alert(
+        `Sorry, you have run out of attempts. The correct number was ${randomNum}`
+      );
     }
   }
 };
