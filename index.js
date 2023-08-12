@@ -151,22 +151,22 @@ const playBonusGame = () => {
 // Function to determine game mode
 function chooseGamemode() {
   while (isActive) {
-    const gameMode = prompt(
+    let gameMode = prompt(
       `Welcome to Number Guesser! Do you want to play on regular or bonus mode?`
     );
-    console.log(`--question what the game should be`);
+    gameMode = gameMode.trim(); // DO NOT FORGET ASSIGNMENT OPERATOR. Reassigned trim value of gameMode
     if (
       gameMode === "regular" ||
-      gameMode === "regular " ||
-      gameMode === "regular mode" ||
       gameMode === "regular mode"
+      // gameMode === "regular mode" - Dont need to check since its trimmed.||
+      // gameMode === "regular " ||
     ) {
       playRegularGame();
     } else if (
       gameMode === "bonus" ||
-      gameMode === "bonus " ||
-      gameMode === "bonus mode" ||
-      gameMode === "bonus mode "
+      gameMode === "bonus mode"
+      // gameMode === "bonus " ||
+      // gameMode === "bonus mode "
     ) {
       playBonusGame();
     } else if (gameMode === null) {
