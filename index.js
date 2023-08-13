@@ -118,7 +118,7 @@ const playBonusGame = () => {
       break;
     } else if (guess > randomNum) {
       alert(
-        `Number is too high☝️ You have ${
+        `Number is too high☝️ ${
           availableTries != AVAILABLE_ATTEMPTS ? "Guess again!" : ""
         }`
       );
